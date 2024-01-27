@@ -40,7 +40,24 @@ class BinaryTree {
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
-
+    if (!this.root) {
+      return 0;
+    }
+    let stack = [[this.root, 1]];
+    let maxDepth = 0;
+    while (stack.length > 0) {
+      let [node, depth] = stack.pop();
+      if (node) {
+        maxDepth = Math.max(maxDepth, depth);
+        if (node.left) {
+          stack.push([node.left, depth + 1])
+        }
+        if (node.right) {
+          stack.push([node.right, depth + 1])
+        }
+      }
+    }
+    return maxDepth;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
