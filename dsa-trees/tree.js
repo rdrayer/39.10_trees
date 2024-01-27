@@ -47,27 +47,41 @@ class Tree {
       return 0;
     }
     // we're adding here, so initialize the total
-    let totalSum = 0;
+    let totalCount = 0;
     // initialize the queue with the root
     let queue = [this.root];
 
     while (queue.length > 0) {
       let currentNode = queue.shift();
-      if (currentNode.val % 2) {
-        totalSum += currentNode.val;
+      if (currentNode.val % 2 === 0) {
+        totalCount ++;
       }
       for (let child of currentNode.children) {
         queue.push(child);
       }
     }
-    return totalSum;
+    return totalCount;
   }
 
   /** numGreater(lowerBound): return a count of the number of nodes
    * whose value is greater than lowerBound. */
 
   numGreater(lowerBound) {
-
+    if (this.root === null) {
+      return 0;
+    }
+    let totalCount = 0;
+    let queue = [this.root];
+    while (queue.length > 0) {
+      let currentNode = queue.shift();
+      if (currentNode.val > lowerBound) {
+        totalCount ++;
+      }
+      for (let child of currentNode.children) {
+        queue.push(child);
+      }
+    }
+    return totalCount;
   }
 }
 
